@@ -37,11 +37,7 @@ export const store = new Vuex.Store({
     setUser (state, payload) {
       state.user = payload
     },
-<<<<<<< HEAD
     setUserData (state, payload) {
-=======
-    setUserInformation (state, payload) {
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
       state.isAdmin = payload.isAdmin
       state.avatarLink = payload.avatarLink
       state.nickname = payload.nickname
@@ -118,11 +114,7 @@ export const store = new Vuex.Store({
             }
             firebase.database().ref('users' + '/' + user.uid).set(userData)
               .then(() => {
-<<<<<<< HEAD
                 commit('setUserData', userData)
-=======
-                commit('setUserInformation', userData)
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
               })
               .catch(error => {
                 console.log(error)
@@ -278,20 +270,12 @@ export const store = new Vuex.Store({
     autoSignin ({commit}, payload) {
       commit('setUser', {id: payload.uid})
     },
-<<<<<<< HEAD
     autoSetUserData ({commit}) {
-=======
-    autoSetUserInfo ({commit}) {
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
       const user = this.getters.user
       firebase.database().ref('users' + '/' + user.id).once('value')
         .then((data) => {
           const answer = data.val()
-<<<<<<< HEAD
           commit('setUserData', answer)
-=======
-          commit('setUserInformation', answer)
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
         })
     },
     clearErrorMessage ({commit}) {
@@ -305,11 +289,7 @@ export const store = new Vuex.Store({
       }
       firebase.auth().signOut()
       commit('setUser', null)
-<<<<<<< HEAD
       commit('setUserData', userData)
-=======
-      commit('setUserInformation', userData)
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
     }
   },
   getters: {
@@ -356,7 +336,6 @@ export const store = new Vuex.Store({
       return state.moreThenFiftyRaces
     },
     getTopResults (state) {
-<<<<<<< HEAD
       const results = state.topResults
       let resultArray = []
       for (let key in results) {
@@ -381,9 +360,6 @@ export const store = new Vuex.Store({
         }
       })
       return resultArray
-=======
-      return state.topResults
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
     }
   }
 })

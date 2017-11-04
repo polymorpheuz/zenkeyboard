@@ -9,11 +9,7 @@
       <input id="mainInput" v-focus v-if="!gameIsPreparing" class="game-input" type="text" v-model="inputValue">
     </div>
     <div class="timer" :class="{ puffer: isPuffing }" v-if="gameIsPreparing">{{ timer }}</div>
-<<<<<<< HEAD
     <div class="results" v-show="gameIsCompleted">
-=======
-    <div class="results" v-if="gameIsCompleted">
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
       <img :src="loadedBookSnippet.imageUrl" height="550">
       <div class="results-info">
         <h1 class="book-title">{{ loadedBookSnippet.bookTitle }}</h1>
@@ -27,11 +23,7 @@
         <router-link to="/" tag="a"><a class="main-button">Back to menu</a></router-link>
       </div>
     </div>
-<<<<<<< HEAD
     <div class="results" v-show="gameIsFailed">
-=======
-    <div class="results" v-if="gameIsFailed">
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
       <img :src="loadedBookSnippet.imageUrl" height="550">
       <div class="results-info">
         <h1 class="book-title">{{ loadedBookSnippet.bookTitle }}</h1>
@@ -44,7 +36,7 @@
 </template>
 
 <script>
-//  import { debounce } from 'lodash'
+  //  import { debounce } from 'lodash'
   export default {
     data () {
       return {

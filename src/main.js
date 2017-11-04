@@ -29,11 +29,8 @@ new Vue({
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignin', user)
-<<<<<<< HEAD
         this.$store.dispatch('autoSetUserData')
-=======
         this.$store.dispatch('autoSetUserInfo')
->>>>>>> dfba5697501b1f8c1d8692b53d7195f4e3c1e87a
       }
     })
   }
