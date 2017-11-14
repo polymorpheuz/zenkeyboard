@@ -173,7 +173,13 @@ export const store = new Vuex.Store({
       firebase.database().ref('top').once('value')
         .then((data) => {
           const answer = data.val()
-          commit('setTopResults', answer)
+          const values = Object.values(answer)
+          if (values.length >= 10) {
+            const trimmedValues = values.splice(0, 9)
+            commit('setTopResults', trimmedValues)
+          } else {
+            commit('setTopResults', answer)
+          }
         })
     },
     deleteLastRace ({commit}, payload) {
@@ -214,6 +220,7 @@ export const store = new Vuex.Store({
       const summaryResult = (cpmSummary.reduce((a, b) => a + b, 0) / cpmSummary.length).toFixed()
       commit('setAverageSpeed', summaryResult)
       commit('setSuccessRate', ((100 / loadedRacingHistory.length) * completedRaces.length).toFixed(1))
+      console.log('Done counting speed and rate!')
     },
     postRaceResult ({commit}, payload) {
       const user = this.getters.user
@@ -233,6 +240,7 @@ export const store = new Vuex.Store({
         avatarLink: payload.avatarLink
       }
       firebase.database().ref('top' + '/' + user.id).set(results)
+      console.log('Done posting!')
     },
     checkAndUpdateRecord ({commit}, payload) {
       const user = this.getters.user

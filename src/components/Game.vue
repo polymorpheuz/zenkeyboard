@@ -228,7 +228,7 @@
         }
         this.$store.dispatch('postInTop', results)
       },
-      finishCompletedGame (succeed) {
+      finishCompletedGame () {
         this.time.finish = new Date()
         this.calculateTimeAndCpm()
         this.postRaceResult(true)

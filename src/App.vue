@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" @click="toggleDropdown">
     <div class="navi-wrapper">
       <div class="navi-container">
         <router-link to="/" tag="a" class="logo"></router-link>
         <div class="link-container">
           <router-link v-for="item in menuItems" tag="a" class="menu-link" :key="item.title" :to="item.link">{{ item.name }}</router-link>
-          <a href="#" v-if="userIsAuthenticated" @click.prevent="toggleList" class="profile-button">
-            <img :src="userData.avatarLink" alt="">
+          <a href="#" v-if="userIsAuthenticated" class="profile-button">
+            <img class="profile-image" :src="userData.avatarLink" alt="">
           </a>
         </div>
       </div>
@@ -34,8 +34,12 @@ export default {
     onLogout () {
       this.$store.dispatch('logout')
     },
-    toggleList () {
-      this.dropdown = !this.dropdown
+    toggleDropdown (event) {
+      if (event.target.classList[0] === 'profile-image') {
+        this.dropdown = !this.dropdown
+      } else {
+        this.dropdown = false
+      }
     }
   },
   computed: {

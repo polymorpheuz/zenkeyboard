@@ -30,7 +30,6 @@ new Vue({
       if (user) {
         this.$store.dispatch('autoSignin', user)
         this.$store.dispatch('autoSetUserData')
-        this.$store.dispatch('autoSetUserInfo')
       }
     })
   }
