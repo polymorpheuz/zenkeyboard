@@ -41,6 +41,6 @@
     padding: 50px;
   }
   .faq-title {
-    font-size: 36px;
+    font-size: 28px;
   }
 </style>

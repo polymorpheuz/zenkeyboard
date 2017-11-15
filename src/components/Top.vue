@@ -8,14 +8,12 @@
 </template>
 <script>
   export default {
-    data () {
-      return {
-        something: 'its'
-      }
-    },
     computed: {
       topResults () {
         return this.$store.getters.getTopResults
+      },
+      loading () {
+        return this.$store.getters.loading
       }
     },
     methods: {

@@ -26,6 +26,7 @@ new Vue({
       projectId: "zenkeyboard-f8d44",
       storageBucket: "zenkeyboard-f8d44.appspot.com"
     })
+    this.$store.dispatch('setLoading', false)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignin', user)

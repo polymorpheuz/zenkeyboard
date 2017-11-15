@@ -3,7 +3,8 @@
     <div class="navi-wrapper">
       <div class="navi-container">
         <router-link to="/" tag="a" class="logo"></router-link>
-        <div class="link-container">
+        <loader v-if="loading"></loader>
+        <div class="link-container" v-if="!loading">
           <router-link v-for="item in menuItems" tag="a" class="menu-link" :key="item.title" :to="item.link">{{ item.name }}</router-link>
           <a href="#" v-if="userIsAuthenticated" class="profile-button">
             <img class="profile-image" :src="userData.avatarLink" alt="">
@@ -24,7 +25,11 @@
 </template>
 
 <script>
+import loader from './components/UI/loader.vue'
 export default {
+  components: {
+    loader
+  },
   data () {
     return {
       dropdown: false
@@ -43,6 +48,9 @@ export default {
     }
   },
   computed: {
+    loading () {
+      return this.$store.getters.loading
+    },
     menuItems () {
       let menuItems = [
         {name: 'Sign up', link: '/signup'},
@@ -67,6 +75,9 @@ export default {
     userData () {
       return this.$store.getters.userData
     }
+  },
+  created () {
+    this.$store.dispatch('setLoading', true)
   }
 
 }
@@ -84,10 +95,6 @@ body {
   margin: 0;
   background: #ededed;
 }
-
-/*.content-wrapper {*/
-  /*min-height: 100vh;*/
-/*}*/
 
 .main-button {
   background: #26a69a;
@@ -122,14 +129,11 @@ h4 {
   margin: 10px 0;
 }
 
-
-
 #app {
   font-family: 'Roboto Slab', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-
 }
 
 .navi-wrapper {
@@ -141,7 +145,7 @@ h4 {
   max-width: 1200px;
   display: flex;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 40px;
   height: 100px;
   align-items: center;
   margin: auto;
@@ -165,14 +169,17 @@ h4 {
   position: absolute;
   background: white;
   text-align: center;
-  top: 130px;
-  right: 20%;
+  top: 120px;
+  right: 5%;
   width: 200px;
   display: inline-block;
   list-style-type: none;
   ul {
     list-style-type: none;
     padding: 0;
+  }
+  @media (max-width: 1200px) {
+    right: 15px;
   }
 }
 
@@ -306,7 +313,7 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 }
 
 /* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
+input:focus ~ .bar:before, input:focus ~ .bar:after, textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
   width:50%;
 }
 
@@ -324,4 +331,9 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   height: 100%;
   text-align: left;
 }
+
+[v-cloak] {
+  display: none;
+}
+
 </style>

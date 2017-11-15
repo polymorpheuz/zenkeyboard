@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
+    loading: true,
     loadedBookSnippet: '',
     loadedRacingHistory: [],
     topResults: [],
@@ -22,6 +23,9 @@ export const store = new Vuex.Store({
     moreThenFiftyRaces: false
   },
   mutations: {
+    setLoading (state, payload) {
+      state.loading = payload
+    },
     setRacingHistory (state, payload) {
       state.loadedRacingHistory = payload
     },
@@ -68,6 +72,9 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    setLoading ({commit}, payload) {
+      commit('setLoading', payload)
+    },
     addContent ({commit}, payload) {
       const bookData = {
         authorName: payload.authorName,
@@ -173,13 +180,14 @@ export const store = new Vuex.Store({
       firebase.database().ref('top').once('value')
         .then((data) => {
           const answer = data.val()
-          const values = Object.values(answer)
-          if (values.length >= 10) {
-            const trimmedValues = values.splice(0, 9)
-            commit('setTopResults', trimmedValues)
-          } else {
-            commit('setTopResults', answer)
-          }
+          commit('setTopResults', answer)
+          // const values = Object.values(answer)
+          // if (values.length >= 10) {
+          //   const trimmedValues = values.splice(0, 9)
+          //   commit('setTopResults', trimmedValues)
+          // } else {
+          //
+          // }
         })
     },
     deleteLastRace ({commit}, payload) {
@@ -276,6 +284,7 @@ export const store = new Vuex.Store({
         })
     },
     autoSignin ({commit}, payload) {
+      commit('setLoading', true)
       commit('setUser', {id: payload.uid})
     },
     autoSetUserData ({commit}) {
@@ -284,6 +293,9 @@ export const store = new Vuex.Store({
         .then((data) => {
           const answer = data.val()
           commit('setUserData', answer)
+        })
+        .then(() => {
+          commit('setLoading', false)
         })
     },
     clearErrorMessage ({commit}) {
@@ -301,6 +313,9 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
+    loading (state) {
+      return state.loading
+    },
     user (state) {
       return state.user
     },
@@ -367,7 +382,8 @@ export const store = new Vuex.Store({
           return -1
         }
       })
-      return resultArray
+      const trimmedResults = resultArray.slice(0, 9)
+      return trimmedResults
     }
   }
 })
