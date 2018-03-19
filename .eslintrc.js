@@ -21,6 +21,7 @@ module.exports = {
     'arrow-parens': 0,
     'quotes': 0,
     'eqeqeq': 0,
+    'use-isnan': 0,
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development

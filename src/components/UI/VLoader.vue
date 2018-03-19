@@ -7,6 +7,11 @@
 </template>
 
 <style>
+  #loader {
+    text-align: center;
+    padding-top: 120px;
+  }
+
   #loader span {
     display: inline-block;
     font-family: 'Roboto', serif;
@@ -39,7 +44,7 @@
     }
 
     50%{
-      opacity: 0.6;
+      opacity: 0.8;
     }
   }
 </style>

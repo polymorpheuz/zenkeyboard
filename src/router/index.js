@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Game from '@/components/Game.vue'
-import Faq from '@/components/Faq.vue'
-import Top from '@/components/Top.vue'
-import Menu from '@/components/Menu.vue'
-import Profile from '@/components/User/Profile.vue'
-import Signin from '@/components/User/Signin.vue'
-import Signup from '@/components/User/Signup.vue'
-import AddContent from '@/components/AddContent.vue'
-import Statistics from '@/components/User/Statistics.vue'
+import Game from '@/containers/Game.vue'
+import Faq from '@/containers/Faq.vue'
+import Top from '@/containers/Top.vue'
+import Menu from '@/containers/Menu.vue'
+import Profile from '@/containers/User/Profile.vue'
+import Signin from '@/containers/User/Signin.vue'
+import Signup from '@/containers/User/Signup.vue'
+import AddContent from '@/containers/AddContent.vue'
+import Stats from '@/containers/User/Stats.vue'
 import AuthGuard from './auth-guard.js'
 import AdminGuard from './admin-guard.js'
 
@@ -60,10 +60,10 @@ export default new Router({
       component: AddContent
     },
     {
-      path: '/statistics',
-      name: 'Statistics',
+      path: '/stats',
+      name: 'Stats',
       beforeEnter: AuthGuard,
-      component: Statistics
+      component: Stats
     }
   ],
   mode: 'history'
